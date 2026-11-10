@@ -77,3 +77,77 @@ servicio.crear(cliente)
 print(cliente.es_valida())           # True
 print(servicio.buscar_por_id(1).nombre)  # Ana Pérez
 print(len(servicio.listar()))        # 1
+
+import re
+
+
+class Cliente:
+    def __init__(self, identificador, nombre, correo, edad):
+        self.identificador = identificador
+        self.nombre = nombre
+        self.correo = correo
+        self.edad = edad
+
+    @property
+    def identificador(self):
+        return self.__identificador
+
+    @identificador.setter
+    def identificador(self, valor):
+        if not isinstance(valor, int) or isinstance(valor, bool) or valor <= 0:
+            raise ValueError("El identificador debe ser un entero positivo.")
+        self.__identificador = valor
+
+    @property
+    def nombre(self):
+        return self.__nombre
+
+    @nombre.setter
+    def nombre(self, valor):
+        if not isinstance(valor, str) or not valor.strip():
+            raise ValueError("El nombre no puede estar vacío.")
+        self.__nombre = valor.strip()
+
+    @property
+    def correo(self):
+        return self.__correo
+
+    @correo.setter
+    def correo(self, valor):
+        if not isinstance(valor, str) or not re.fullmatch(
+            r"[^@\s]+@[^@\s]+\.[^@\s]+", valor
+        ):
+            raise ValueError("El correo no es válido.")
+        self.__correo = valor.strip()
+
+    @property
+    def edad(self):
+        return self.__edad
+
+    @edad.setter
+    def edad(self, valor):
+        if not isinstance(valor, int) or isinstance(valor, bool) or not 18 <= valor <= 120:
+            raise ValueError("La edad debe ser un número entero entre 18 y 120.")
+        self.__edad = valor
+
+    def __str__(self):
+        return (
+            f"Cliente {self.identificador}: {self.nombre}, "
+            f"{self.correo}, {self.edad} años"
+        )
+
+
+# Crear y mostrar varios clientes
+clientes = [
+    Cliente(1, "Ana Pérez", "ana@email.com", 25),
+    Cliente(2, "Luis Gómez", "luis@email.com", 32),
+]
+
+for cliente in clientes:
+    print(cliente)
+
+# Probar las validaciones
+try:
+    Cliente(3, "Marta Ruiz", "correo-invalido", 20)
+except ValueError as error:
+    print("Validación correcta:", error)
