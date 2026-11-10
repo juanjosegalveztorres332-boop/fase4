@@ -201,3 +201,25 @@ class reserva:
     self.horas=horas
     self.cantidad=cantidad
     self.estado="pediente por reservar"
+ def confirmar_reserva(self):
+     if self.estado=="reserva cancelada":
+         raise ValueError("la reserva no ha sido cancelada")
+     
+     self.estado="reserva confirmada"
+     return "reserva confirmada"
+    def cancelar(self):
+        if self.estado=="reserva confirmada":
+            raise ValueError("la reserva ya esta confirmada")
+        self.estado="reserva cancelada"
+        return "reserva cancelada correctamente"
+    
+    def mostrar_reserva(self):
+        return self.servicio.calcular_costo(self.horas,self.cantidad)
+    
+    def mostrar_reserva(self):
+        return(
+            f"reserva:{self.identificador}\n"
+            f"cliente:{self.cliente}\n"
+            f"servicio:{self.servicio.nombre}\n"
+            f"estado:{self.estado}\n"
+            f"costo total:${self.calcular_costo():.0f}\n"
