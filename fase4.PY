@@ -151,3 +151,34 @@ try:
     Cliente(3, "Marta Ruiz", "correo-invalido", 20)
 except ValueError as error:
     print("Validación correcta:", error)
+
+class tiposervicio(ABC):
+    
+    def__init__(self,nombre,tarifa):
+        self.nombre=nombre
+        self.tarifa=tarifa 
+        
+    def abstractmethod
+    def calcular_costo(self,horas,cantidad=1)
+    pass
+
+class ServicioSala(tiposervicio):
+    def__init__(self,nombre,precio_hora):
+        self.nombre=nombre
+        self.precio_hora=precio_hora
+        
+    def calcular_costo(self,horas=1,cantidad=1,dias=1):
+        return self.precio_hora*horas*cantidad*dias
+    
+    def obtener_nombre(self):
+        return "reserva de sala"
+    
+class ServicioEquipo(tiposervicio):
+    def__init__(self,nombre,precio_dia):
+        self.nombre=nombre
+        self.precio_dia=precio_dia
+    def calcular_costo(self,horas=1,cantidad=1,dias=1):
+        return self.precio_dia*horas*cantidad*dias
+    
+    def obtener_nombre(self):
+        return "reserva de equipos"
