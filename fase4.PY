@@ -182,3 +182,22 @@ class ServicioEquipo(tiposervicio):
     
     def obtener_nombre(self):
         return "reserva de equipos"
+
+class ServicioAsesoria(tiposervicio):
+    def__init__(self,especialidad,precio_hora):
+        self.especialidad = especialidad
+        self.precio_hora = precio_hora
+        
+    def calcular_costo(self,horas=1,cantidad=1,dias=1):
+        return self.precio_hora*horas*cantidad*dias
+    def obtener_nombre(self):
+        return "Asesoria especializada"
+    
+class reserva:
+    def__init__(self,identificador,cliente,servicio,horas,cantidad=1)
+    self.identificador=identificador
+    self.cliente=cliente
+    self.servicio=servicio
+    self.horas=horas
+    self.cantidad=cantidad
+    self.estado="pediente por reservar"
